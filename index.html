@@ -7,7 +7,7 @@
 </head>
 <body>
 	<div id="app">
-		<child-component v-bind:propsdata="messsage"></child-component>
+		<child-component v-on:show-log='printText'></child-component>
 	</div>
 
 
@@ -17,17 +17,27 @@
 	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
 	<script>
 		Vue.component('child-component', {
-			props: ['propsdata'],
-			template: '<p>{{ propsdata }}</p>'
-		});
-
-		new Vue({
-			el: '#app',
-			data: {
-				messsage: 'Hello Vue!'
+			template: '<button v-on:click="showLog">show</button>',
+			methods: {
+				showLog: function() {
+					this.$emit('show-log');
+				}
 			}
 		});
 
+		var app = new Vue({
+			el: '#app',
+			data: {
+				message: 'Hello Vue! passed from Parent Component',
+				call: 'this is a call. do you know?'
+			},
+			methods: {
+				printText: function() {
+					console.log('received an event');
+				}
+			}
+
+		});
 	</script>
 </body>
 </html>
