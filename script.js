@@ -1,69 +1,38 @@
-var app = new Vue({
-			el: '#app',
-			data: {
-				message : 'Hello, Vue!'
-			}
-		});
-
-
-
-var app2 = new Vue({
-	el: '#app-2',
+var example1 = new Vue({
+	el: '#example-1',
 	data: {
-		message: '이 페이지는 ' + new Date() + '에 로드 되었습니다.'
+		counter: 0
 	}
 })
 
-var app3 = new Vue({
-	el: '#app-3',
+var example2 = new Vue({
+	el: '#example-2',
 	data: {
-		seen: true
-	}
-})
-
-var app4 = new Vue({
-	el: '#app-4',
-	data: {
-		todos: [
-			{ text: 'JavaScript 배우기' },
-		    { text: 'Vue 배우기' },
-		    { text: '무언가 멋진 것을 만들기' }
-		]
-	}
-})
-
-var app5 = new Vue({
-	el: '#app-5',
-	data: {
-		message: 'Hello Vue!'
+		name: 'Vue.js'
 	},
+	// 메소드는 'methods' 객체 안에 정의합니다.
 	methods: {
-		reverseMessage: function(){
-			this.message = this.message.split('').reverse().join('')
+		greet: function(event) {
+			// 메소드 안에서 사용하는 this는 Vue 인스턴스를 가리킵니다.
+			alert('Hello' + this.name + '!')
+			// event는 네이티브 Dom 이벤트 입니다.
+			if(event){
+				alert(event.target.tagName)
+			}
 		}
 	}
 })
 
-var app6 = new Vue({
-	el: '#app-6',
-	data: {
-		message: '안녕하세요 Vue!'
+var example3 = new Vue({
+	el: '#example-3',
+	methods: {
+		say: function(message) {
+			alert(message)
+		},
+		warn: function(message, event) {
+			//native evnet에 엑세스 할 수 있습니다.
+			if (event) event.preventDefault()
+				alert(message)
+		}
 	}
-})
-
-
-Vue.component('todo-item', {
-	props: ['todo'],
- 	template: '<li>{{ todo.text }}</li>'
-})
-
-var app7 = new Vue({
- 	el: '#app-7',
- 	data: {
-    groceryList: [
-    	{ id: 0, text: 'Vegetables' },
-    	{ id: 1, text: 'Cheese' },
-    	{ id: 2, text: 'Whatever else humans are supposed to eat' }
-    ]
-  }
 })
